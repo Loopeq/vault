@@ -7,7 +7,7 @@ from core.models import User
 from core.utils.utils import get_password_hash
 from core.settings import settings
 from core.db.db_helper import db_helper
-
+from core.constants import ROOT_PATH
 
 async def create_first_superuser(session: AsyncSession):
     USERNAME = settings.admin.username
@@ -27,6 +27,10 @@ async def create_first_superuser(session: AsyncSession):
         )
         session.add(admin_user)
         await session.commit()
+
+
+async def prepare_folders():
+    ROOT_PATH.mkdir(parents=True, exist_ok=True)
 
 
 async def main():

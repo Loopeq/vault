@@ -7,10 +7,10 @@ from typing import Annotated
 from fastapi import Path as RPath, Query, HTTPException
 
 from core.enums.unit_time import UnitTime
-from core.utils.data_manager import DataManager
-from strategies.constants import PATH
-from pathlib import Path
-from core.utils.strategy_manager import StrategyManager
+from core.managers.data_manager import DataManager
+
+from core.managers.file_manager import FileManager
+from core.managers.strategy_manager import StrategyManager
 from core.enums.symbols import Symbols
 
 
@@ -42,9 +42,10 @@ async def execute_strategy(
 
     result = None
 
-    path = Path.joinpath(PATH, f"{current_active_user.uuid}", f"{file_uuid}.py")
+    path = FileManager.get_file_path(current_active_user.uuid, file_uuid)
     if not path.exists():
         raise HTTPException(status_code=404, detail=f'Strategy {file_uuid} not found')
+
     function = StrategyManager.get_function(file_uuid=file_uuid, path=path)
 
     if StrategyManager.validate_function(func=function):

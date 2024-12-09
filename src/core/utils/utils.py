@@ -1,8 +1,6 @@
-from fastapi import HTTPException
 from passlib.context import CryptContext
-from datetime import date, datetime, timedelta
-from dateutil.relativedelta import relativedelta
 from core.enums.unit_time import UnitTime
+from pathlib import Path
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -27,3 +25,10 @@ def get_freq(unit_time: UnitTime) -> str:
         'YEARS': 'Y'
     }
     return freq_mapping.get(unit_time.upper(), 'D')
+
+
+def get_src_parent():
+    current = Path(__file__).resolve()
+    while current.parent.name != 'src':
+        current = current.parent
+    return current

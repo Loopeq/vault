@@ -1,11 +1,12 @@
 import uuid
 from importlib.util import spec_from_file_location, module_from_spec
 from pathlib import Path
-from typing import Callable, List, Dict
+from typing import Callable
 import inspect
 from core.exceptions.http_exceptions import BuildException
 from core.settings import settings
-from strategies.constants import STRATEGY_FUNCTION_NAME
+
+STRATEGY_FUNCTION_NAME = 'strategy'
 
 
 class StrategyManager:

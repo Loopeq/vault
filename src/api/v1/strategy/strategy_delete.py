@@ -4,7 +4,7 @@ from typing import Annotated
 from fastapi import Path, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from core.exceptions.db_exceptions import DatabaseException
-from core.utils.file_manager import FileManager
+from core.managers.file_manager import FileManager
 from api.dependencies import CURRENT_ACTIVE_USER
 from api.v1.crud.strategy import StrategyRepo
 from api.v1.strategy import router

@@ -13,7 +13,7 @@ from fastapi import Path as RPath
 from core.db.db_helper import db_helper
 from core.exceptions.db_exceptions import DatabaseException
 from core.schemas.strategy import StrategyInDB
-from core.utils.file_manager import FileManager
+from core.managers.file_manager import FileManager
 
 
 @router.patch("/update/{file_uuid}")

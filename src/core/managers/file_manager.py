@@ -4,7 +4,7 @@ from pathlib import Path
 
 from fastapi import UploadFile, HTTPException
 
-from strategies.constants import PATH
+from core.constants import ROOT_PATH
 
 
 class FileManager:
@@ -32,8 +32,7 @@ class FileManager:
     @staticmethod
     def check_file_structure(user_uuid: uuid.UUID):
         try:
-            PATH.mkdir(exist_ok=True)
-            user_folder = PATH / str(user_uuid)
+            user_folder = ROOT_PATH / str(user_uuid)
             user_folder.mkdir(exist_ok=True)
         except Exception as e:
             raise HTTPException(
@@ -43,7 +42,7 @@ class FileManager:
 
     @staticmethod
     def get_file_path(user_uuid: uuid.UUID, file_uuid: uuid.UUID) -> Path:
-        return PATH / str(user_uuid) / f"{file_uuid}.py"
+        return ROOT_PATH / str(user_uuid) / f"{file_uuid}.py"
 
     @staticmethod
     def remove_file(user_uuid: uuid.UUID, file_uuid: uuid.UUID) -> bool:

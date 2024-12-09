@@ -41,7 +41,7 @@ services:
       - db
     attach: false
 
-  create_first_superuser:
+  start_up:
     build:
       context: .
       dockerfile: Dockerfile
@@ -50,7 +50,7 @@ services:
     depends_on:
       - db
       - web
-    command: python -m scripts.create_first_superuser
+    command: python -m scripts.start_up
     volumes:
       - ./src:/code/src
     environment:

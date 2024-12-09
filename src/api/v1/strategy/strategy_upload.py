@@ -1,6 +1,6 @@
 from sqlalchemy.exc import IntegrityError
 
-from core.utils.file_manager import FileManager
+from core.managers.file_manager import FileManager
 from api.v1.strategy import router
 from typing import Annotated
 from fastapi import UploadFile, HTTPException, Depends
@@ -25,11 +25,9 @@ async def upload_strategy(
         strategy_in = StrategyInDB(
             name=file.filename, user_uuid=current_user.uuid
         )
-
         strategy_out = await StrategyRepo.insert_strategy(
             strategy_in, session=session
         )
-
         abs_path = FileManager.get_file_path(
             user_uuid=current_user.uuid, file_uuid=strategy_out.uuid
         )

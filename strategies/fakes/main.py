@@ -1,6 +1,3 @@
-#2d6920b1-3c1c-40d9-a5aa-4998920a8b38
-
-
 
 def strategy(data, params):
     signals = []

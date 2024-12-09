@@ -6,6 +6,13 @@ current_file_dir = os.path.dirname(os.path.realpath(__file__))
 env_path = os.path.join(current_file_dir, "..", ".env")
 
 
+class S3Settings(BaseModel):
+    access_key: str
+    secret_key: str
+    url: str
+    bucket: str
+
+
 class StrategyManagerSettings(BaseModel):
     data: str = "data"
     params: str = "params"
@@ -60,6 +67,7 @@ class Settings(BaseSettings):
     db: PostgresSettings
     admin: AdminConfig
     strategy_manager: StrategyManagerSettings
+    s3: S3Settings
 
     class Config:
         env_nested_delimiter = "__"
