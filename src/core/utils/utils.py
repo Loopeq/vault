@@ -18,17 +18,12 @@ def strip_error_msg(msg: str):
 
 
 def get_freq(unit_time: UnitTime) -> str:
-    freq_mapping = {
-        'DAYS': 'D',
-        'WEEKS': 'W',
-        'MONTHS': 'M',
-        'YEARS': 'Y'
-    }
-    return freq_mapping.get(unit_time.upper(), 'D')
+    freq_mapping = {"DAYS": "D", "WEEKS": "W", "MONTHS": "M", "YEARS": "Y"}
+    return freq_mapping.get(unit_time.upper(), "D")
 
 
 def get_src_parent():
     current = Path(__file__).resolve()
-    while current.parent.name != 'src':
+    while current.parent.name != "src":
         current = current.parent
     return current

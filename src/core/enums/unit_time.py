@@ -6,7 +6,7 @@ class StrEnum(str, Enum):
 
 
 class UnitTime(StrEnum):
-    DAYS = 'DAYS'
-    WEEKS = 'WEEKS'
-    MONTHS = 'MONTHS'
-    YEARS = 'YEARS'
+    DAYS = "DAYS"
+    WEEKS = "WEEKS"
+    MONTHS = "MONTHS"
+    YEARS = "YEARS"

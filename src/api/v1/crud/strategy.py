@@ -18,24 +18,6 @@ class StrategyRepo:
         return new_strategy
 
     @staticmethod
-    async def update_strategy(strategy_in: StrategyInDB, strategy_uuid: uuid.UUID, session: AsyncSession):
-        stmt = select(Strategy).filter(Strategy.uuid == strategy_uuid)
-        strategy = await session.execute(stmt)
-        existing_strategy = strategy.scalar_one_or_none()
-
-        if not existing_strategy:
-            raise DatabaseException(msg=f'Strategy with UUID {strategy_uuid} not found.')
-
-        for key, value in strategy_in.model_dump().items():
-            setattr(existing_strategy, key, value)
-
-        session.add(existing_strategy)
-        await session.flush()
-        await session.refresh(existing_strategy)
-
-        return existing_strategy
-
-    @staticmethod
     async def remove_strategy(strategy_uuid: uuid.UUID, session: AsyncSession):
         stmt = (
             delete(Strategy)
@@ -56,3 +38,10 @@ class StrategyRepo:
         if result is None:
             raise DatabaseException(msg="You don't have strategies")
         return result
+
+    @staticmethod
+    async def get_strategy_by_name(user_uuid: uuid.UUID, name: str, session: AsyncSession) -> Strategy | None:
+        result = await session.execute(select(Strategy).filter(Strategy.user_uuid == user_uuid,
+                                                               Strategy.name == name))
+        strategy = result.scalars().one_or_none()
+        return strategy

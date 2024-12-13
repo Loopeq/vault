@@ -10,7 +10,7 @@ def get_current_user(user: User) -> UserOut:
         disabled=user.disabled,
         superuser=user.superuser,
         id=user.id,
-        uuid=user.uuid
+        uuid=user.uuid,
     )
 
 

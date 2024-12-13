@@ -9,6 +9,7 @@ from core.settings import settings
 from core.db.db_helper import db_helper
 from core.constants import ROOT_PATH
 
+
 async def create_first_superuser(session: AsyncSession):
     USERNAME = settings.admin.username
     PASSWORD = get_password_hash(settings.admin.password)
